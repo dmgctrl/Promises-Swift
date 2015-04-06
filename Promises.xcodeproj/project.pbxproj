@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F99C3D341AD2D95A000C0273 /* Promises.h in Headers */ = {isa = PBXBuildFile; fileRef = F99C3D331AD2D95A000C0273 /* Promises.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		F99C3D411AD2D95A000C0273 /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
+		F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
+		F99C3D4D1AD2D9B1000C0273 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D4C1AD2D9B1000C0273 /* Queue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,10 +26,11 @@
 /* Begin PBXFileReference section */
 		F99C3D2E1AD2D95A000C0273 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D321AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F99C3D331AD2D95A000C0273 /* Promises.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Promises.h; sourceTree = "<group>"; };
 		F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D3F1AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D401AD2D95A000C0273 /* PromisesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesTests.swift; sourceTree = "<group>"; };
+		F99C3D4A1AD2D96B000C0273 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		F99C3D4C1AD2D9B1000C0273 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/iOS/Queue.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99C3D4D1AD2D9B1000C0273 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +59,7 @@
 				F99C3D301AD2D95A000C0273 /* Promises */,
 				F99C3D3D1AD2D95A000C0273 /* PromisesTests */,
 				F99C3D2F1AD2D95A000C0273 /* Products */,
+				F99C3D4E1AD2D9C1000C0273 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,7 +75,7 @@
 		F99C3D301AD2D95A000C0273 /* Promises */ = {
 			isa = PBXGroup;
 			children = (
-				F99C3D331AD2D95A000C0273 /* Promises.h */,
+				F99C3D4A1AD2D96B000C0273 /* Promise.swift */,
 				F99C3D311AD2D95A000C0273 /* Supporting Files */,
 			);
 			path = Promises;
@@ -102,6 +106,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F99C3D4E1AD2D9C1000C0273 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F99C3D4C1AD2D9B1000C0273 /* Queue.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -109,7 +121,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F99C3D341AD2D95A000C0273 /* Promises.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +131,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F99C3D441AD2D95A000C0273 /* Build configuration list for PBXNativeTarget "Promises" */;
 			buildPhases = (
+				F98024331AD2E83200CE2B22 /* Build External Dependencies */,
 				F99C3D291AD2D95A000C0273 /* Sources */,
 				F99C3D2A1AD2D95A000C0273 /* Frameworks */,
 				F99C3D2B1AD2D95A000C0273 /* Headers */,
@@ -204,11 +216,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F98024331AD2E83200CE2B22 /* Build External Dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build External Dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_FOLDER=\"${PROJECT_DIR}/Carthage/Build/iOS\"\nif [ ! -d \"${BUILD_FOLDER}\" ]; then\n    /usr/local/bin/carthage bootstrap\nfi";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F99C3D291AD2D95A000C0273 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +283,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -299,6 +331,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -319,25 +352,36 @@
 		F99C3D451AD2D95A000C0273 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Promises/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F99C3D461AD2D95A000C0273 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Promises/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -358,7 +402,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = PromisesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -371,7 +415,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = PromisesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -395,6 +439,7 @@
 				F99C3D461AD2D95A000C0273 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F99C3D471AD2D95A000C0273 /* Build configuration list for PBXNativeTarget "PromisesTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +448,7 @@
 				F99C3D491AD2D95A000C0273 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

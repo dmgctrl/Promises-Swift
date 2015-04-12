@@ -65,73 +65,71 @@ public class Promise<V> {
     
     public func then(block: (V)->()) -> Self {
         let executionQueue = self.executionQueue
-        queue.async {
-            if let value = self.value? {
+        queue.async({
+            if let value = self.value {
                 if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                    executionQueue.async({
                         block(value)
-                    }
+                    })
                 } else {
                     block(value)
                 }
             }
-        }
+        })
         return self
     }
     
     public func then<R>(block: (V)->(R)) -> Promise<R> {
         let executionQueue = self.executionQueue
         let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: self.executionQueue)
-        queue.async {
-            if let value = self.value? {
+        queue.async({
+            if let value = self.value {
                 if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                    executionQueue.async({
                         promise.resolve(block(value))
-                        return
-                    }
+                    })
                 } else {
                     promise.resolve(block(value))
                 }
-            } else if let error = self.error? {
+            } else if let error = self.error {
                 promise.reject(error)
             }
-        }
+        })
         return promise
     }
     
     public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
         let executionQueue = self.executionQueue
         let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: self.executionQueue)
-        queue.async {
-            if let value = self.value? {
+        queue.async({
+            if let value = self.value {
                 if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                    executionQueue.async({
                         promise.resolve(block(value))
-                        return
-                    }
+                    })
                 } else {
                     promise.resolve(block(value))
                 }
-            } else if let error = self.error? {
+            } else if let error = self.error {
                 promise.reject(error)
             }
-        }
+        })
         return promise
     }
     
     public func catch(block: (NSError)->()) -> Self {
         let executionQueue = self.executionQueue
-        queue.async {
-            if let error = self.error? {
+        queue.async({
+            if let error = self.error {
                 if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                    executionQueue.async({
                         block(error)
-                    }
+                    })
                 } else {
                     block(error)
                 }
             }
-        }
+        })
         return self
     }
     
@@ -172,19 +170,19 @@ public class Promise<V> {
 
 public func promise(block: ()->()) -> Promise<Void> {
     let p = Promise<Void>()
-    Queue.Background.async {
+    Queue.Background.async({
         block()
         p.resolve()
-    }
+    })
     return p
 }
 
 
 public func promise<V>(block: ()->V) -> Promise<V> {
     let p = Promise<V>()
-    Queue.Background.async {
+    Queue.Background.async({
         let result = block()
         p.resolve(result)
-    }
+    })
     return p
 }

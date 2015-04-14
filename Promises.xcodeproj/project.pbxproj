@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22954F5E1ADD965E005F38B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22954F5C1ADD9166005F38B6 /* UIKit.framework */; };
 		F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		F99C3D411AD2D95A000C0273 /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22954F5C1ADD9166005F38B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F99C3D2E1AD2D95A000C0273 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D321AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22954F5E1ADD965E005F38B6 /* UIKit.framework in Frameworks */,
 				F99C3D4D1AD2D9B1000C0273 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +112,7 @@
 		F99C3D4E1AD2D9C1000C0273 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22954F5C1ADD9166005F38B6 /* UIKit.framework */,
 				F99C3D4C1AD2D9B1000C0273 /* Queue.framework */,
 			);
 			name = Frameworks;

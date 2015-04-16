@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22954F5E1ADD965E005F38B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22954F5C1ADD9166005F38B6 /* UIKit.framework */; };
-		BCFA430C1AE03A60007F78F7 /* Promises(OSX).framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */; };
-		BCFA431D1AE03CE2007F78F7 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFA431C1AE03CE2007F78F7 /* Queue.framework */; };
+		BC8772E71AE04EDC00DFD1BC /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
+		BC9D5F6F1AE052C1009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
+		BC9D5F711AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
+		BC9D5F721AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
+		BC9D5F731AE052DB009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
 		BCFA43201AE03D4F007F78F7 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
 		F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		F99C3D411AD2D95A000C0273 /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
-		F99C3D4D1AD2D9B1000C0273 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D4C1AD2D9B1000C0273 /* Queue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,16 +37,16 @@
 
 /* Begin PBXFileReference section */
 		22954F5C1ADD9166005F38B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Promises(OSX).framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Promises(OSX)Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCFA431C1AE03CE2007F78F7 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/Mac/Queue.framework; sourceTree = SOURCE_ROOT; };
+		BC9D5F6E1AE052C1009E3805 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/iOS/Queue.framework; sourceTree = "<group>"; };
+		BC9D5F701AE052D8009E3805 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/Mac/Queue.framework; sourceTree = "<group>"; };
+		BCFA43011AE03A5F007F78F7 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFA430B1AE03A60007F78F7 /* PromisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D2E1AD2D95A000C0273 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D321AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D3F1AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D401AD2D95A000C0273 /* PromisesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesTests.swift; sourceTree = "<group>"; };
 		F99C3D4A1AD2D96B000C0273 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
-		F99C3D4C1AD2D9B1000C0273 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/iOS/Queue.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFA431D1AE03CE2007F78F7 /* Queue.framework in Frameworks */,
+				BC9D5F711AE052D8009E3805 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFA430C1AE03A60007F78F7 /* Promises(OSX).framework in Frameworks */,
+				BC9D5F721AE052D8009E3805 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,8 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22954F5E1ADD965E005F38B6 /* UIKit.framework in Frameworks */,
-				F99C3D4D1AD2D9B1000C0273 /* Queue.framework in Frameworks */,
+				BC9D5F6F1AE052C1009E3805 /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC9D5F731AE052DB009E3805 /* Queue.framework in Frameworks */,
 				F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,8 +89,8 @@
 		BCFA431E1AE03D04007F78F7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BC9D5F6E1AE052C1009E3805 /* Queue.framework */,
 				22954F5C1ADD9166005F38B6 /* UIKit.framework */,
-				F99C3D4C1AD2D9B1000C0273 /* Queue.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -97,7 +98,7 @@
 		BCFA431F1AE03D0A007F78F7 /* OSX */ = {
 			isa = PBXGroup;
 			children = (
-				BCFA431C1AE03CE2007F78F7 /* Queue.framework */,
+				BC9D5F701AE052D8009E3805 /* Queue.framework */,
 			);
 			name = OSX;
 			sourceTree = "<group>";
@@ -117,8 +118,8 @@
 			children = (
 				F99C3D2E1AD2D95A000C0273 /* Promises.framework */,
 				F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */,
-				BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */,
-				BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */,
+				BCFA43011AE03A5F007F78F7 /* Promises.framework */,
+				BCFA430B1AE03A60007F78F7 /* PromisesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,7 +202,7 @@
 			);
 			name = "Promises(OSX)";
 			productName = "Promises(OSX)";
-			productReference = BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */;
+			productReference = BCFA43011AE03A5F007F78F7 /* Promises.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BCFA430A1AE03A60007F78F7 /* Promises(OSX)Tests */ = {
@@ -219,7 +220,7 @@
 			);
 			name = "Promises(OSX)Tests";
 			productName = "Promises(OSX)Tests";
-			productReference = BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */;
+			productReference = BCFA430B1AE03A60007F78F7 /* PromisesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F99C3D2D1AD2D95A000C0273 /* Promises */ = {
@@ -364,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8772E71AE04EDC00DFD1BC /* PromisesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +422,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Promises;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -444,7 +446,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Promises;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -457,6 +459,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -465,7 +468,7 @@
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PromisesTests;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -478,11 +481,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PromisesTests;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -508,7 +512,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -523,7 +526,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -556,7 +558,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -564,7 +565,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -623,6 +623,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -640,6 +641,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
@@ -657,6 +659,7 @@
 				BCFA43151AE03A60007F78F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BCFA43191AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)Tests" */ = {
 			isa = XCConfigurationList;
@@ -665,6 +668,7 @@
 				BCFA43171AE03A60007F78F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F99C3D281AD2D95A000C0273 /* Build configuration list for PBXProject "Promises" */ = {
 			isa = XCConfigurationList;

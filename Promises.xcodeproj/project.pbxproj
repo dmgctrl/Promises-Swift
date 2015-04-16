@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		22954F5E1ADD965E005F38B6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22954F5C1ADD9166005F38B6 /* UIKit.framework */; };
+		BCFA430C1AE03A60007F78F7 /* Promises(OSX).framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */; };
+		BCFA431D1AE03CE2007F78F7 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFA431C1AE03CE2007F78F7 /* Queue.framework */; };
+		BCFA43201AE03D4F007F78F7 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
 		F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		F99C3D411AD2D95A000C0273 /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
@@ -15,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BCFA430D1AE03A60007F78F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F99C3D251AD2D95A000C0273 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCFA43001AE03A5F007F78F7;
+			remoteInfo = "Promises(OSX)";
+		};
 		F99C3D3B1AD2D95A000C0273 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F99C3D251AD2D95A000C0273 /* Project object */;
@@ -26,6 +36,9 @@
 
 /* Begin PBXFileReference section */
 		22954F5C1ADD9166005F38B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Promises(OSX).framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Promises(OSX)Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFA431C1AE03CE2007F78F7 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/Mac/Queue.framework; sourceTree = SOURCE_ROOT; };
 		F99C3D2E1AD2D95A000C0273 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99C3D321AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +49,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BCFA42FD1AE03A5F007F78F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFA431D1AE03CE2007F78F7 /* Queue.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFA43081AE03A60007F78F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFA430C1AE03A60007F78F7 /* Promises(OSX).framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F99C3D2A1AD2D95A000C0273 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BCFA431E1AE03D04007F78F7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				22954F5C1ADD9166005F38B6 /* UIKit.framework */,
+				F99C3D4C1AD2D9B1000C0273 /* Queue.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		BCFA431F1AE03D0A007F78F7 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				BCFA431C1AE03CE2007F78F7 /* Queue.framework */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
 		F99C3D241AD2D95A000C0273 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +117,8 @@
 			children = (
 				F99C3D2E1AD2D95A000C0273 /* Promises.framework */,
 				F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */,
+				BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */,
+				BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,8 +143,8 @@
 		F99C3D3D1AD2D95A000C0273 /* PromisesTests */ = {
 			isa = PBXGroup;
 			children = (
-				F99C3D401AD2D95A000C0273 /* PromisesTests.swift */,
 				F99C3D3E1AD2D95A000C0273 /* Supporting Files */,
+				F99C3D401AD2D95A000C0273 /* PromisesTests.swift */,
 			);
 			path = PromisesTests;
 			sourceTree = "<group>";
@@ -112,8 +160,8 @@
 		F99C3D4E1AD2D9C1000C0273 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22954F5C1ADD9166005F38B6 /* UIKit.framework */,
-				F99C3D4C1AD2D9B1000C0273 /* Queue.framework */,
+				BCFA431F1AE03D0A007F78F7 /* OSX */,
+				BCFA431E1AE03D04007F78F7 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,6 +169,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		BCFA42FE1AE03A5F007F78F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F99C3D2B1AD2D95A000C0273 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,6 +186,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BCFA43001AE03A5F007F78F7 /* Promises(OSX) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFA43181AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)" */;
+			buildPhases = (
+				BCFA42FC1AE03A5F007F78F7 /* Sources */,
+				BCFA42FD1AE03A5F007F78F7 /* Frameworks */,
+				BCFA42FE1AE03A5F007F78F7 /* Headers */,
+				BCFA42FF1AE03A5F007F78F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Promises(OSX)";
+			productName = "Promises(OSX)";
+			productReference = BCFA43011AE03A5F007F78F7 /* Promises(OSX).framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BCFA430A1AE03A60007F78F7 /* Promises(OSX)Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFA43191AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)Tests" */;
+			buildPhases = (
+				BCFA43071AE03A60007F78F7 /* Sources */,
+				BCFA43081AE03A60007F78F7 /* Frameworks */,
+				BCFA43091AE03A60007F78F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCFA430E1AE03A60007F78F7 /* PBXTargetDependency */,
+			);
+			name = "Promises(OSX)Tests";
+			productName = "Promises(OSX)Tests";
+			productReference = BCFA430B1AE03A60007F78F7 /* Promises(OSX)Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F99C3D2D1AD2D95A000C0273 /* Promises */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F99C3D441AD2D95A000C0273 /* Build configuration list for PBXNativeTarget "Promises" */;
@@ -177,6 +268,12 @@
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Tonic Design";
 				TargetAttributes = {
+					BCFA43001AE03A5F007F78F7 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					BCFA430A1AE03A60007F78F7 = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					F99C3D2D1AD2D95A000C0273 = {
 						CreatedOnToolsVersion = 6.2;
 					};
@@ -199,11 +296,27 @@
 			targets = (
 				F99C3D2D1AD2D95A000C0273 /* Promises */,
 				F99C3D381AD2D95A000C0273 /* PromisesTests */,
+				BCFA43001AE03A5F007F78F7 /* Promises(OSX) */,
+				BCFA430A1AE03A60007F78F7 /* Promises(OSX)Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BCFA42FF1AE03A5F007F78F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFA43091AE03A60007F78F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F99C3D2C1AD2D95A000C0273 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,6 +352,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BCFA42FC1AE03A5F007F78F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFA43201AE03D4F007F78F7 /* Promise.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFA43071AE03A60007F78F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F99C3D291AD2D95A000C0273 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +386,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BCFA430E1AE03A60007F78F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCFA43001AE03A5F007F78F7 /* Promises(OSX) */;
+			targetProxy = BCFA430D1AE03A60007F78F7 /* PBXContainerItemProxy */;
+		};
 		F99C3D3C1AD2D95A000C0273 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F99C3D2D1AD2D95A000C0273 /* Promises */;
@@ -266,6 +399,94 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BCFA43141AE03A60007F78F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Promises/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BCFA43151AE03A60007F78F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Promises/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BCFA43161AE03A60007F78F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PromisesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BCFA43171AE03A60007F78F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PromisesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		F99C3D421AD2D95A000C0273 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -429,6 +650,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BCFA43181AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFA43141AE03A60007F78F7 /* Debug */,
+				BCFA43151AE03A60007F78F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BCFA43191AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFA43161AE03A60007F78F7 /* Debug */,
+				BCFA43171AE03A60007F78F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F99C3D281AD2D95A000C0273 /* Build configuration list for PBXProject "Promises" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

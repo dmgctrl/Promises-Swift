@@ -20,10 +20,12 @@ class PromisesTests: XCTestCase {
             }
             .then {
                 v = $0
-                expectation.fulfill()
             }
             .catch { error in
                 e = error
+            }
+            .then {
+                expectation.fulfill()
             }
 
         waitForExpectationsWithTimeout(3) { error in

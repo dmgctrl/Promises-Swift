@@ -172,6 +172,48 @@ public class Promise<V> {
         }
         return self
     }
+    
+
+    //  Values
+    //  ------
+    
+    var valueChain: Value?
+    
+    public func valueFor(key: UnsafePointer<Void>) -> Any? {
+        if let v = valueChain {
+            return v.valueFor(key)
+        } else {
+            return nil
+        }
+    }
+    
+    public func withValue(value: Any, forKey key: UnsafePointer<Void>) -> Self {
+        valueChain = Value(parent: valueChain, key: key, any: value)
+        return self
+    }
+}
+
+class Value {
+    let parent: Value?
+    let key: UnsafePointer<Void>
+    let any: Any
+    
+    init(parent: Value?, key: UnsafePointer<Void>, any: Any) {
+        self.parent = parent
+        self.key = key
+        self.any = any
+    }
+    
+    func valueFor(key: UnsafePointer<Void>) -> Any? {
+        var v: Value! = self
+        do {
+            if v.key == key {
+                return v.any
+            }
+            v = v.parent
+        } while (nil != v)
+        return nil
+    }
 }
 
 

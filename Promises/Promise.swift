@@ -232,23 +232,27 @@ public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
     var apr = [R?](count: promises.count, repeatedValue: nil)
     var i = 0
     var remaining = promises.count
-    for each in promises {
-        each.then { value in
-            apr[i] = value
-            remaining--
-            if 0 == remaining && !promise.resolved {
-                var ar = [R]()
-                for pr in apr {
-                    ar.append(pr!)
+    if remaining > 0 {
+        for each in promises {
+            each.then { value in
+                apr[i] = value
+                remaining--
+                if 0 == remaining && !promise.resolved {
+                    var ar = [R]()
+                    for pr in apr {
+                        ar.append(pr!)
+                    }
+                    promise.resolve(ar)
                 }
-                promise.resolve(ar)
+            }.catch { error in
+                if !promise.resolved {
+                    promise.reject(error)
+                }
             }
-        }.catch { error in
-            if !promise.resolved {
-                promise.reject(error)
-            }
+            i++
         }
-        i++
+    } else {
+        promise.resolve([])
     }
     return promise
 }

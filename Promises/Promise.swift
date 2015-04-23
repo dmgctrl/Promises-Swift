@@ -180,11 +180,14 @@ public class Promise<V> {
     var valueChain: Value?
     
     public func valueFor(key: UnsafePointer<Void>) -> Any? {
-        if let v = valueChain {
-            return v.valueFor(key)
-        } else {
-            return nil
-        }
+        var v: Value! = valueChain
+        do {
+            if v.key == key {
+                return v.any
+            }
+            v = v.parent
+        } while (nil != v)
+        return nil
     }
     
     public func withValue(value: Any, forKey key: UnsafePointer<Void>) -> Self {
@@ -192,6 +195,7 @@ public class Promise<V> {
         return self
     }
 }
+
 
 class Value {
     let parent: Value?
@@ -202,17 +206,6 @@ class Value {
         self.parent = parent
         self.key = key
         self.any = any
-    }
-    
-    func valueFor(key: UnsafePointer<Void>) -> Any? {
-        var v: Value! = self
-        do {
-            if v.key == key {
-                return v.any
-            }
-            v = v.parent
-        } while (nil != v)
-        return nil
     }
 }
 

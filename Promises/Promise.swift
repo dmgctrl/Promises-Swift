@@ -149,12 +149,12 @@ public class Promise<V> {
     
     public func valueFor(key: UnsafePointer<Void>) -> Any? {
         var v: Value! = valueChain
-        do {
+        while nil != v {
             if v.key == key {
                 return v.any
             }
             v = v.parent
-        } while (nil != v)
+        }
         return nil
     }
     

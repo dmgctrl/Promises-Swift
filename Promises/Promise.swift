@@ -14,7 +14,7 @@ public class Promise<V> {
     let targetQueue: Queue
     var once: dispatch_once_t = 0
     
-    public init(targetQueue: Queue = .Background, executionQueue: Queue = .Main) {
+    public init(targetQueue: Queue = .Background) {
         if targetQueue != .Background {
             queue.withTarget(targetQueue)
         }
@@ -80,7 +80,7 @@ public class Promise<V> {
     }
 
     public func then<R>(onQueue executionQueue: Queue, block: (V)->(R)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
+        let promise = Promise<R>(targetQueue: self.targetQueue)
         queue.async {
             if let value = self.value {
                 if executionQueue != self.targetQueue {
@@ -103,7 +103,7 @@ public class Promise<V> {
     }
 
     public func then<R>(onQueue executionQueue: Queue, block: (V)->(Promise<R>)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
+        let promise = Promise<R>(targetQueue: self.targetQueue)
         queue.async {
             if let value = self.value {
                 if executionQueue != self.targetQueue {

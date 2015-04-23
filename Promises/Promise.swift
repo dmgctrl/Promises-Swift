@@ -228,7 +228,7 @@ public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
 }
 
 public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
-    var promise = Promise<[R]>()
+    let promise = Promise<[R]>()
     var remaining = promises.count
     if remaining > 0 {
         var apr = [R?](count: remaining, repeatedValue: nil)

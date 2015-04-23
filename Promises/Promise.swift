@@ -229,10 +229,10 @@ public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
 
 public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
     var promise = Promise<[R]>()
-    var apr = [R?](count: promises.count, repeatedValue: nil)
-    var i = 0
     var remaining = promises.count
     if remaining > 0 {
+        var apr = [R?](count: remaining, repeatedValue: nil)
+        var i = 0
         for each in promises {
             each.then { value in
                 apr[i] = value

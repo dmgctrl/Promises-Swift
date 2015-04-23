@@ -45,8 +45,8 @@ public class Promise<V> {
                 executionQueue.async {
                     _ = promise.resolve(block(value))
                 }
-            } else if let error = self.error {
-                promise.reject(error)
+            } else {
+                promise.reject(self.error!)
             }
         }
         return promise.withValueChain(valueChain)
@@ -63,8 +63,8 @@ public class Promise<V> {
                 executionQueue.async {
                     _ = promise.resolve(block(value))
                 }
-            } else if let error = self.error {
-                promise.reject(error)
+            } else {
+                promise.reject(self.error!)
             }
         }
         return promise.withValueChain(valueChain)

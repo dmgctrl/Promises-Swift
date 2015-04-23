@@ -145,10 +145,10 @@ public class Promise<V> {
     //  Values
     //  ------
     
-    var valueChain: Value?
+    var valueChain: Value!
     
     public func valueFor(key: UnsafePointer<Void>) -> Any? {
-        var v: Value! = valueChain
+        var v = valueChain
         while nil != v {
             if v.key == key {
                 return v.any

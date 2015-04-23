@@ -12,15 +12,21 @@ public class Promise<V> {
     private(set) public var error: NSError?
     private let queue = Queue().suspend()
     private var once: dispatch_once_t = 0
+    private var defaultQueue: Queue = .Main
     
     public init() {
     }
     
     //  Public Methods
     //
+    
+    public func defaultQueue(queue: Queue) -> Self {
+        self.defaultQueue = queue
+        return self
+    }
 
     public func then(block: (V)->()) -> Self {
-        return then(onQueue: .Main, block)
+        return then(onQueue: defaultQueue, block)
     }
 
     public func then(onQueue executionQueue: Queue, block: (V)->()) -> Self {
@@ -35,7 +41,7 @@ public class Promise<V> {
     }
     
     public func then<R>(block: (V)->(R)) -> Promise<R> {
-        return then(onQueue: .Main, block)
+        return then(onQueue: defaultQueue, block)
     }
 
     public func then<R>(onQueue executionQueue: Queue, block: (V)->(R)) -> Promise<R> {
@@ -53,7 +59,7 @@ public class Promise<V> {
     }
 
     public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
-        return then(onQueue: .Main, block)
+        return then(onQueue: defaultQueue, block)
     }
 
     public func then<R>(onQueue executionQueue: Queue, block: (V)->(Promise<R>)) -> Promise<R> {
@@ -71,7 +77,7 @@ public class Promise<V> {
     }
 
     public func catch(block: (NSError)->()) -> Self {
-        return catch(onQueue: .Main, block)
+        return catch(onQueue: defaultQueue, block)
     }
 
     public func catch(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {

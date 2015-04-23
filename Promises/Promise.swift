@@ -16,6 +16,7 @@ public class Promise<V> {
     
     public init() {
     }
+
     
     //  Public Methods
     //

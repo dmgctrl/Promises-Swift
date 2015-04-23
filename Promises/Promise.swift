@@ -21,38 +21,6 @@ public class Promise<V> {
         self.targetQueue = targetQueue
     }
     
-    //  Class Methods
-    //
-    
-    public class func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
-        var promise = Promise<[R]>()
-        var apr = [R?](count: promises.count, repeatedValue: nil)
-        var i = 0
-        var remaining = promises.count
-        for each in promises {
-            each.then { value in
-                apr[i] = value
-                remaining--
-                if 0 == remaining && 0 == promise.once {
-                    var ar = [R]()
-                    for pr in apr {
-                        ar.append(pr!)
-                    }
-                    promise.resolve(ar)
-                }
-            }.catch { error in
-                if  0 == promise.once {
-                    promise.reject(error)
-                }
-            }
-        }
-        return promise
-    }
-    
-    public class func all<R>(promises: Promise<R>...) -> Promise<[R]> {
-        return all(promises)
-    }
-    
     //  Public Methods
     //
 
@@ -95,7 +63,7 @@ public class Promise<V> {
                 promise.reject(error)
             }
         }
-        return promise
+        return promise.withValueChain(valueChain)
     }
 
     public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
@@ -118,7 +86,7 @@ public class Promise<V> {
                 promise.reject(error)
             }
         }
-        return promise
+        return promise.withValueChain(valueChain)
     }
 
     public func catch(block: (NSError)->()) -> Self {
@@ -194,6 +162,11 @@ public class Promise<V> {
         valueChain = Value(parent: valueChain, key: key, any: value)
         return self
     }
+
+    func withValueChain(valueChain: Value?) -> Self {
+        self.valueChain = valueChain
+        return self
+    }
 }
 
 
@@ -209,6 +182,9 @@ class Value {
     }
 }
 
+
+//  Convenience Methods
+//
 
 public func promise<V>(onQueue queue: Queue = .Background, executor: ((V)->(), (NSError)->())->()) -> Promise<V> {
     let p = Promise<V>()
@@ -242,3 +218,37 @@ public func promise<V>(onQueue queue: Queue = .Background, executor: ()->Promise
     }
     return p
 }
+
+
+//  Coalescing Methods
+//
+
+public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
+    return all(promises)
+}
+
+public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
+    var promise = Promise<[R]>()
+    var apr = [R?](count: promises.count, repeatedValue: nil)
+    var i = 0
+    var remaining = promises.count
+    for each in promises {
+        each.then { value in
+            apr[i] = value
+            remaining--
+            if 0 == remaining && 0 == promise.once {
+                var ar = [R]()
+                for pr in apr {
+                    ar.append(pr!)
+                }
+                promise.resolve(ar)
+            }
+        }.catch { error in
+            if  0 == promise.once {
+                promise.reject(error)
+            }
+        }
+    }
+    return promise
+}
+

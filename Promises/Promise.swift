@@ -248,6 +248,7 @@ public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
                 promise.reject(error)
             }
         }
+        i++
     }
     return promise
 }

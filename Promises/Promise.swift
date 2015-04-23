@@ -5,7 +5,7 @@ import Queue
 public class Promise<V> {
     public var resolved: Bool {
         get {
-            return value != nil || error != nil
+            return 0 == once
         }
     }
     private(set) public var value: V?
@@ -236,7 +236,7 @@ public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
         each.then { value in
             apr[i] = value
             remaining--
-            if 0 == remaining && 0 == promise.once {
+            if 0 == remaining && !promise.resolved {
                 var ar = [R]()
                 for pr in apr {
                     ar.append(pr!)
@@ -244,7 +244,7 @@ public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
                 promise.resolve(ar)
             }
         }.catch { error in
-            if  0 == promise.once {
+            if !promise.resolved {
                 promise.reject(error)
             }
         }

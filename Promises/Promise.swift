@@ -102,7 +102,7 @@ public class Promise<V> {
         return then(onQueue: .Main, block: block)
     }
 
-    public func then<R>(onQueue executionQueue: Queue = .Main, block: (V)->(Promise<R>)) -> Promise<R> {
+    public func then<R>(onQueue executionQueue: Queue, block: (V)->(Promise<R>)) -> Promise<R> {
         let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
         queue.async {
             if let value = self.value {

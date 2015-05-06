@@ -120,8 +120,12 @@ public class Promise<V> {
         }
         return promise
     }
+    
+    public func catch(block: (NSError)->()) -> Self {
+        return catch(onQueue: .Main, block: block)
+    }
 
-    public func catch(onQueue executionQueue: Queue = .Main, block: (NSError)->()) -> Self {
+    public func catch(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
         queue.async {
             if let error = self.error {
                 if executionQueue != self.targetQueue {

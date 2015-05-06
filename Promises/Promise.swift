@@ -55,8 +55,12 @@ public class Promise<V> {
     
     //  Public Methods
     //
+    
+    public func then(block: (V)->()) -> Self {
+        return then(onQueue: .Main, block: block)
+    }
 
-    public func then(onQueue executionQueue: Queue = .Main, block: (V)->()) -> Self {
+    public func then(onQueue executionQueue: Queue, block: (V)->()) -> Self {
         queue.async {
             if let value = self.value {
                 if executionQueue != self.targetQueue {
@@ -71,7 +75,11 @@ public class Promise<V> {
         return self
     }
     
-    public func then<R>(onQueue executionQueue: Queue = .Main, block: (V)->(R)) -> Promise<R> {
+    public func then<R>(block: (V)->(R)) -> Promise<R> {
+        return then(onQueue: .Main, block: block)
+    }
+    
+    public func then<R>(onQueue executionQueue: Queue, block: (V)->(R)) -> Promise<R> {
         let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
         queue.async {
             if let value = self.value {
@@ -88,6 +96,10 @@ public class Promise<V> {
             }
         }
         return promise
+    }
+    
+    public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
+        return then(onQueue: .Main, block: block)
     }
 
     public func then<R>(onQueue executionQueue: Queue = .Main, block: (V)->(Promise<R>)) -> Promise<R> {

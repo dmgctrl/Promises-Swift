@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29A3E0631BB1E7C5003E881D /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
 		BC8772E71AE04EDC00DFD1BC /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
-		BC9D5F6F1AE052C1009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
 		BC9D5F711AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
 		BC9D5F721AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
 		BC9D5F731AE052DB009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC9D5F6F1AE052C1009E3805 /* Queue.framework in Frameworks */,
+				29A3E0631BB1E7C5003E881D /* Queue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +266,9 @@
 		F99C3D251AD2D95A000C0273 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Tonic Design";
 				TargetAttributes = {
 					BCFA43001AE03A5F007F78F7 = {
@@ -422,6 +424,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises;
 				PRODUCT_NAME = Promises;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -446,6 +449,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises;
 				PRODUCT_NAME = Promises;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -468,6 +472,7 @@
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonicdesign.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PromisesTests;
 				SDKROOT = macosx;
 			};
@@ -486,6 +491,7 @@
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonicdesign.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PromisesTests;
 				SDKROOT = macosx;
 			};
@@ -512,6 +518,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -590,6 +597,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -612,6 +620,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -620,17 +629,14 @@
 		F99C3D481AD2D95A000C0273 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonicdesign.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -638,13 +644,10 @@
 		F99C3D491AD2D95A000C0273 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = PromisesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonicdesign.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -8,7 +8,7 @@ class PromisesTests: XCTestCase {
         var v = ""
         var e: NSError?
         
-        let p = promise { () -> Int in
+        promise { () -> Int in
                 23
             }
             .then {
@@ -20,7 +20,7 @@ class PromisesTests: XCTestCase {
             .then {
                 v = $0
             }
-            .catch { error in
+            .`catch` { error in
                 e = error
             }
             .then {

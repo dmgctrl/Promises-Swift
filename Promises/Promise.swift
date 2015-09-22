@@ -25,9 +25,9 @@ public class Promise<V> {
     //
     
     public class func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
-        var promise = Promise<[R]>()
+        let promise = Promise<[R]>()
         var apr = [R?](count: promises.count, repeatedValue: nil)
-        var i = 0
+        let i = 0
         var remaining = promises.count
         for each in promises {
             each.then { value in
@@ -40,7 +40,7 @@ public class Promise<V> {
                     }
                     promise.resolve(ar)
                 }
-            }.catch { error in
+            }.`catch` { error in
                 if  0 == promise.once {
                     promise.reject(error)
                 }
@@ -121,11 +121,11 @@ public class Promise<V> {
         return promise
     }
     
-    public func catch(block: (NSError)->()) -> Self {
-        return catch(onQueue: .Main, block: block)
+    public func `catch`(block: (NSError)->()) -> Self {
+        return `catch`(onQueue: .Main, block: block)
     }
 
-    public func catch(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
+    public func `catch`(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
         queue.async {
             if let error = self.error {
                 if executionQueue != self.targetQueue {
@@ -155,7 +155,7 @@ public class Promise<V> {
             promise.then { value in
                 self.value = value
                 self.queue.resume()
-            }.catch { error in
+            }.`catch` { error in
                 self.error = error
                 self.queue.resume()
             }

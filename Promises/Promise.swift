@@ -21,38 +21,6 @@ public class Promise<V> {
         self.targetQueue = targetQueue
     }
     
-    //  Class Methods
-    //
-    
-    public class func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
-        let promise = Promise<[R]>()
-        var apr = [R?](count: promises.count, repeatedValue: nil)
-        let i = 0
-        var remaining = promises.count
-        for each in promises {
-            each.then { value in
-                apr[i] = value
-                remaining--
-                if 0 == remaining && 0 == promise.once {
-                    var ar = [R]()
-                    for pr in apr {
-                        ar.append(pr!)
-                    }
-                    promise.resolve(ar)
-                }
-            }.error { error in
-                if  0 == promise.once {
-                    promise.reject(error)
-                }
-            }
-        }
-        return promise
-    }
-    
-    public class func all<R>(promises: Promise<R>...) -> Promise<[R]> {
-        return all(promises)
-    }
-    
     //  Public Methods
     //
     
@@ -172,6 +140,37 @@ public class Promise<V> {
         }
         return self
     }
+}
+
+
+public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
+    let promise = Promise<[R]>()
+    var apr = [R?](count: promises.count, repeatedValue: nil)
+    let i = 0
+    var remaining = promises.count
+    for each in promises {
+        each.then { value in
+            apr[i] = value
+            remaining--
+            if 0 == remaining && 0 == promise.once {
+                var ar = [R]()
+                for pr in apr {
+                    ar.append(pr!)
+                }
+                promise.resolve(ar)
+            }
+            }.error { error in
+                if  0 == promise.once {
+                    promise.reject(error)
+                }
+        }
+    }
+    return promise
+}
+
+
+public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
+    return all(promises)
 }
 
 

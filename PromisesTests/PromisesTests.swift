@@ -20,7 +20,7 @@ class PromisesTests: XCTestCase {
             .then {
                 v = $0
             }
-            .`catch` { error in
+            .error { error in
                 e = error
             }
             .then {

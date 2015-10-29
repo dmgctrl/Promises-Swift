@@ -40,7 +40,7 @@ public class Promise<V> {
                     }
                     promise.resolve(ar)
                 }
-            }.`catch` { error in
+            }.error { error in
                 if  0 == promise.once {
                     promise.reject(error)
                 }
@@ -121,11 +121,11 @@ public class Promise<V> {
         return promise
     }
     
-    public func `catch`(block: (NSError)->()) -> Self {
-        return `catch`(onQueue: .Main, block: block)
+    public func error(block: (NSError)->()) -> Self {
+        return error(onQueue: .Main, block: block)
     }
 
-    public func `catch`(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
+    public func error(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
         queue.async {
             if let error = self.error {
                 if executionQueue != self.targetQueue {
@@ -155,7 +155,7 @@ public class Promise<V> {
             promise.then { value in
                 self.value = value
                 self.queue.resume()
-            }.`catch` { error in
+            }.error { error in
                 self.error = error
                 self.queue.resume()
             }

@@ -3,18 +3,13 @@ import Queue
 
 
 public class Promise<V> {
-    public var resolved: Bool {
-        get {
-            return value != nil || error != nil
-        }
-    }
     private(set) public var value: V?
     private(set) public var error: NSError?
     let queue = Queue().suspend()
     let targetQueue: Queue
     var once: dispatch_once_t = 0
     
-    public init(targetQueue: Queue = .Background, executionQueue: Queue = .Main) {
+    public init(targetQueue: Queue = .Background) {
         if targetQueue != .Background {
             queue.withTarget(targetQueue)
         }
@@ -23,16 +18,18 @@ public class Promise<V> {
     
     //  Public Methods
     //
-    
-    public func then(block: (V)->()) -> Self {
-        return then(onQueue: .Main, block: block)
+
+    public var isFulfilled: Bool {
+        get {
+            return once != 0
+        }
     }
 
-    public func then(onQueue executionQueue: Queue, block: (V)->()) -> Self {
+    public func then(on executionQueue: Queue? = nil, block: (V)->()) -> Self {
         queue.async {
             if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                if let q = executionQueue where q != self.targetQueue {
+                    q.async {
                         block(value)
                     }
                 } else {
@@ -43,16 +40,12 @@ public class Promise<V> {
         return self
     }
     
-    public func then<R>(block: (V)->(R)) -> Promise<R> {
-        return then(onQueue: .Main, block: block)
-    }
-    
-    public func then<R>(onQueue executionQueue: Queue, block: (V)->(R)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
+    public func then<R>(on executionQueue: Queue? = nil, block: (V)->(R)) -> Promise<R> {
+        let promise = Promise<R>(targetQueue: self.targetQueue)
         queue.async {
             if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                if let q = executionQueue where q != self.targetQueue {
+                    q.async {
                         promise.resolve(block(value))
                         return
                     }
@@ -66,16 +59,12 @@ public class Promise<V> {
         return promise
     }
     
-    public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
-        return then(onQueue: .Main, block: block)
-    }
-
-    public func then<R>(onQueue executionQueue: Queue, block: (V)->(Promise<R>)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
+    public func then<R>(onQueue executionQueue: Queue? = nil, block: (V)->(Promise<R>)) -> Promise<R> {
+        let promise = Promise<R>(targetQueue: self.targetQueue)
         queue.async {
             if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                if let q = executionQueue where q != self.targetQueue {
+                    q.async {
                         promise.resolve(block(value))
                         return
                     }
@@ -89,15 +78,11 @@ public class Promise<V> {
         return promise
     }
     
-    public func error(block: (NSError)->()) -> Self {
-        return error(onQueue: .Main, block: block)
-    }
-
-    public func error(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
+    public func error(on executionQueue: Queue? = nil, block: (NSError)->()) -> Self {
         queue.async {
             if let error = self.error {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
+                if let q = executionQueue where q != self.targetQueue {
+                    q.async {
                         block(error)
                     }
                 } else {
@@ -184,7 +169,7 @@ public func promise<V>(onQueue queue: Queue = .Background, executor: ((V)->(), (
             _ = p.reject(error)
         }
         executor(resolve, reject)
-        assert(p.resolved, "This promise must be resolved by calling resolve() or reject()")
+        assert(p.isFulfilled, "This promise must be resolved by calling resolve() or reject()")
     }
     return p
 }

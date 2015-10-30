@@ -144,10 +144,10 @@ public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
                 }
                 promise.resolve(ar)
             }
-            }.error { error in
-                if  0 == promise.once {
-                    promise.reject(error)
-                }
+        }.error { error in
+            if  0 == promise.once {
+                promise.reject(error)
+            }
         }
     }
     return promise

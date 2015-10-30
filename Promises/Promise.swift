@@ -128,7 +128,7 @@ public class Promise<V> {
 }
 
 
-public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
+public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
     let promise = Promise<[R]>()
     var apr = [R?](count: promises.count, repeatedValue: nil)
     let i = 0
@@ -154,12 +154,7 @@ public func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
 }
 
 
-public func all<R>(promises: Promise<R>...) -> Promise<[R]> {
-    return all(promises)
-}
-
-
-public func promise<V>(onQueue queue: Queue = .Background, executor: ((V)->(), (NSError)->())->()) -> Promise<V> {
+public func promise<V>(on queue: Queue = .Background, executor: ((V)->(), (NSError)->())->()) -> Promise<V> {
     let p = Promise<V>()
     queue.async {
         let resolve = { (value: V) in
@@ -175,7 +170,7 @@ public func promise<V>(onQueue queue: Queue = .Background, executor: ((V)->(), (
 }
 
 
-public func promise<V>(onQueue queue: Queue = .Background, executor: ()->V) -> Promise<V> {
+public func promise<V>(on queue: Queue = .Background, executor: ()->V) -> Promise<V> {
     let p = Promise<V>()
     queue.async {
         _ = p.resolve(executor())
@@ -184,7 +179,7 @@ public func promise<V>(onQueue queue: Queue = .Background, executor: ()->V) -> P
 }
 
 
-public func promise<V>(onQueue queue: Queue = .Background, executor: ()->Promise<V>) -> Promise<V> {
+public func promise<V>(on queue: Queue = .Background, executor: ()->Promise<V>) -> Promise<V> {
     let p = Promise<V>()
     queue.async {
         _ = p.resolve(executor())

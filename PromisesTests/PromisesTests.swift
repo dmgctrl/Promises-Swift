@@ -6,7 +6,7 @@ class PromisesTests: XCTestCase {
     func test() {
         let expectation = expectationWithDescription("promise completes")
         var v = ""
-        var e: NSError?
+        var e: ErrorType?
         
         promise { () -> Int in
                 23
@@ -25,6 +25,9 @@ class PromisesTests: XCTestCase {
             }
             .then {
                 expectation.fulfill()
+            }
+            .always {
+                print(v)
             }
 
         waitForExpectationsWithTimeout(3) { error in

@@ -11,11 +11,14 @@ class PromisesTests: XCTestCase {
         promise { () -> Int in
                 23
             }
-            .then {
-                $0 + 23
+            .then { i in
+                i + 23
             }
             .then {
                 String($0)
+            }
+            .then { v in
+                print(v)
             }
             .then {
                 v = $0
@@ -23,11 +26,11 @@ class PromisesTests: XCTestCase {
             .error { error in
                 e = error
             }
-            .then {
-                expectation.fulfill()
-            }
             .always {
                 print(v)
+            }
+            .then {
+                expectation.fulfill()
             }
 
         waitForExpectationsWithTimeout(3) { error in
@@ -36,5 +39,22 @@ class PromisesTests: XCTestCase {
         XCTAssert("46" == v)
         XCTAssert(e == nil)
     }
-    
+ 
+    func test2() {
+        let expectation = expectationWithDescription("promise completes")
+
+        let x = promise {
+            print("23")
+        }.then {
+            print($0)
+        }.then {
+            return 23
+        }.then { i in
+            print(i)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3) { error in
+        }
+    }
 }

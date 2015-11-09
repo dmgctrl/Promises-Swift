@@ -2,208 +2,350 @@ import Foundation
 import Queue
 
 
+public enum Resolution<V> {
+    case Completed(value: V)
+    case Failed(error: ErrorType)
+}
+
+
 public class Promise<V> {
-    public var resolved: Bool {
-        get {
-            return value != nil || error != nil
-        }
-    }
-    private(set) public var value: V?
-    private(set) public var error: NSError?
-    let queue = Queue().suspend()
-    let targetQueue: Queue
+    private let queue: Queue
+    private var resolution: Resolution<V>? = nil
     var once: dispatch_once_t = 0
-    
-    public init(targetQueue: Queue = .Background, executionQueue: Queue = .Main) {
-        if targetQueue != .Background {
-            queue.withTarget(targetQueue)
+
+    init(_ queue: Queue, block: (() -> (Resolution<V>))? = nil) {
+        self.queue = queue
+        if let b = block {
+            queue.async {
+                self.resolution = b()
+            }
         }
-        self.targetQueue = targetQueue
     }
     
-    //  Class Methods
-    //
+    /// returns the resolved value
+    ///
+    /// - returns: the value, or nil if the promise is unresolved or resolved 
+    ///   to an error
+    public var value: V! {
+        get {
+            switch self.resolution! {
+            case .Completed(let value):
+                return value
+            case .Failed:
+                return nil
+            }
+        }
+    }
+
+    /// returns the resolved error
+    ///
+    /// - returns: the error, or nil if the promise is unresolved or resolved 
+    ///   to a value
+    public var error: ErrorType! {
+        get {
+            switch self.resolution! {
+            case .Completed:
+                return nil
+            case .Failed(let error):
+                return error
+            }
+        }
+    }
+
+    /// returns true if the promise has been resolved
+    ///
+    /// - returns: a boolean value indicating whether or not the promise has 
+    ///   been resolved
+    public var isFulfilled: Bool {
+        get {
+            return resolution != nil
+        }
+    }
     
-    public class func all<R>(promises: [Promise<R>]) -> Promise<[R]> {
-        let promise = Promise<[R]>()
-        var apr = [R?](count: promises.count, repeatedValue: nil)
+    /// schedules a block to be executed when the promise resolves to a value
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func then(block: (V) -> ()) -> Self {
+        resolved { resolution in
+            switch resolution {
+            case .Completed(let value):
+                block(value)
+            case .Failed:
+                break
+            }
+        }
+        return self
+    }
+
+    /// schedules a block to be executed on the given execution queue, when 
+    /// the promise resolves to a value
+    ///
+    /// - parameter on: the queue to dispatch the block to
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func then(on executionQueue: Queue, _ block: (V) -> ()) -> Self {
+        resolved { resolution in
+            switch resolution {
+            case .Completed(let value):
+                executionQueue.async { block(value) }
+            case .Failed:
+                break
+            }
+        }
+        return self
+    }
+
+    /// schedules a block to be executed when the promise resolves to a value
+    /// and uses the return value of that block as the resolution to a new 
+    /// promise.  any error thrown will cause the returned promise to resolve
+    /// as failed.
+    ///
+    /// - returns: a promise of the same type as the return value of the given 
+    ///   block, for chaining calls
+    public func then<R>(block: (V) throws -> (R)) -> Promise<R> {
+        return Promise<R>(self.queue) {
+            switch self.resolution! {
+            case .Completed(let value):
+                do {
+                    return .Completed(value: try block(value))
+                } catch (let error) {
+                    return .Failed(error: error)
+                }
+            case .Failed(let error):
+                return .Failed(error: error)
+            }
+        }
+    }
+
+    /// schedules a block to be executed on the given execution queue, when
+    /// the promise resolves to a value and uses the return value of that block
+    /// as the resolution to a new promise.  any error thrown will cause the 
+    /// returned promise to resolve as failed.
+    ///
+    /// - parameter on: the queue to dispatch the block to
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type as the return value of the given
+    ///   block, for chaining calls
+    public func then<R>(on executionQueue: Queue, _ block: (V) throws -> (R)) -> Promise<R> {
+        let pr = Promise<R>(Queue().suspend())
+        resolved { resolution in
+            executionQueue.async {
+                switch resolution {
+                case .Completed(let value):
+                    do {
+                        pr.resolve(.Completed(value: try block(value)))
+                    } catch (let error) {
+                        pr.resolve(.Failed(error: error))
+                    }
+                case .Failed(let error):
+                    pr.resolve(.Failed(error: error))
+                }
+            }
+        }
+        return pr
+    }
+
+    /// schedules a block to be executed when the promise resolves to an error
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func error(block: (ErrorType) -> ()) -> Self {
+        resolved { resolution in
+            switch resolution {
+            case .Completed:
+                break
+            case .Failed(let error):
+                block(error)
+            }
+        }
+        return self
+    }
+
+    /// schedules a block to be executed on the given execution queue, when the 
+    /// promise resolves to an error
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func error(on executionQueue: Queue, _ block: (ErrorType) -> ()) -> Self {
+        always {
+            switch self.resolution! {
+            case .Completed:
+                break
+            case .Failed(let error):
+                executionQueue.async { block(error) }
+            }
+        }
+        return self
+    }
+
+    /// schedules a block to be executed when the promise resolves to an error
+    /// and uses the block's result as the resolution to a new promise.  this
+    /// allows an error to be converted into success.
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func recover(block: (ErrorType) throws -> (V)) -> Promise<V> {
+        return Promise<V>(self.queue) {
+            switch self.resolution! {
+            case .Completed:
+                return self.resolution!
+            case .Failed(let error):
+                do {
+                    return .Completed(value: try block(error))
+                } catch (let error) {
+                    return .Failed(error: error)
+                }
+            }
+        }
+    }
+
+    /// schedules a block to be executed on the given execution queue, when the 
+    /// promise resolves to an error and uses the block's result as the 
+    /// resolution to a new promise.  this allows an error to be converted into 
+    /// success.
+    ///
+    /// - parameter on: the queue to dispatch the block to
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func recover(on executionQueue: Queue, _ block: (ErrorType) throws -> (V)) -> Promise<V> {
+        let pv = Promise(Queue().suspend())
+        resolved { resolution in
+            executionQueue.async {
+                switch resolution {
+                case .Completed:
+                    pv.resolve(resolution)
+                case .Failed(let error):
+                    do {
+                        pv.resolve(.Completed(value: try block(error)))
+                    } catch (let error) {
+                        pv.resolve(.Failed(error: error))
+                    }
+                }
+            }
+        }
+        return pv
+    }
+
+    /// schedules a block to be executed when the promise is resolved
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func always(block: ()->()) -> Self {
+        queue.async(block)
+        return self
+    }
+
+    /// schedules a block to be executed on the given execution queue when the 
+    /// promise is resolved.
+    ///
+    /// - parameter on: the queue to dispatch the block to
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func always(on executionQueue: Queue, block: ()->()) -> Self {
+        queue.async { executionQueue.async(block) }
+        return self
+    }
+
+    /// schedules a block to be executed on the given execution queue when the
+    /// promise is resolved, passing the resolution
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type, for chaining calls
+    public func resolved(block: (Resolution<V>)->()) -> Self {
+        queue.async { block(self.resolution!) }
+        return self
+    }
+
+    
+    // Internal Methods
+    
+    func resolve(resolution: Resolution<V>) {
+        dispatch_once(&once) {
+            self.resolution = resolution
+            self.queue.resume()
+        }
+    }
+}
+
+
+public func promise<V>(on executionQueue: Queue = .Background, executor: ((V)->(), (ErrorType)->())->()) -> Promise<V> {
+    let p = Promise<V>(Queue().suspend())
+    executionQueue.async {
+        let resolve = { (value: V) in
+            p.resolve(.Completed(value: value))
+        }
+        let reject = { error in
+            p.resolve(.Failed(error: error))
+        }
+        executor(resolve, reject)
+    }
+    return p;
+}
+
+
+public func promise<V>(on executionQueue: Queue = .Background, executor: () throws -> V) -> Promise<V> {
+    let p = Promise<V>(Queue().suspend())
+    executionQueue.async {
+        do {
+            p.resolve(.Completed(value: try executor()))
+        } catch (let error) {
+            p.resolve(.Failed(error: error))
+        }
+    }
+    return p;
+}
+
+
+public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
+    return promise { resolve, reject in
+        var apr = [V?](count: promises.count, repeatedValue: nil)
         let i = 0
-        var remaining = promises.count
+        var remaining = Int32(promises.count)
         for each in promises {
             each.then { value in
                 apr[i] = value
-                remaining--
-                if 0 == remaining && 0 == promise.once {
-                    var ar = [R]()
+                if 0 == OSAtomicDecrement32(&remaining) {
+                    var ar = [V]()
                     for pr in apr {
                         ar.append(pr!)
                     }
-                    promise.resolve(ar)
+                    resolve(ar)
                 }
-            }.`catch` { error in
-                if  0 == promise.once {
-                    promise.reject(error)
-                }
-            }
+            }.error(reject)
         }
-        return promise
-    }
-    
-    public class func all<R>(promises: Promise<R>...) -> Promise<[R]> {
-        return all(promises)
-    }
-    
-    //  Public Methods
-    //
-    
-    public func then(block: (V)->()) -> Self {
-        return then(onQueue: .Main, block: block)
-    }
-
-    public func then(onQueue executionQueue: Queue, block: (V)->()) -> Self {
-        queue.async {
-            if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
-                        block(value)
-                    }
-                } else {
-                    block(value)
-                }
-            }
-        }
-        return self
-    }
-    
-    public func then<R>(block: (V)->(R)) -> Promise<R> {
-        return then(onQueue: .Main, block: block)
-    }
-    
-    public func then<R>(onQueue executionQueue: Queue, block: (V)->(R)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
-        queue.async {
-            if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
-                        promise.resolve(block(value))
-                        return
-                    }
-                } else {
-                    promise.resolve(block(value))
-                }
-            } else if let error = self.error {
-                promise.reject(error)
-            }
-        }
-        return promise
-    }
-    
-    public func then<R>(block: (V)->(Promise<R>)) -> Promise<R> {
-        return then(onQueue: .Main, block: block)
-    }
-
-    public func then<R>(onQueue executionQueue: Queue, block: (V)->(Promise<R>)) -> Promise<R> {
-        let promise = Promise<R>(targetQueue: self.targetQueue, executionQueue: executionQueue)
-        queue.async {
-            if let value = self.value {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
-                        promise.resolve(block(value))
-                        return
-                    }
-                } else {
-                    promise.resolve(block(value))
-                }
-            } else if let error = self.error {
-                promise.reject(error)
-            }
-        }
-        return promise
-    }
-    
-    public func `catch`(block: (NSError)->()) -> Self {
-        return `catch`(onQueue: .Main, block: block)
-    }
-
-    public func `catch`(onQueue executionQueue: Queue, block: (NSError)->()) -> Self {
-        queue.async {
-            if let error = self.error {
-                if executionQueue != self.targetQueue {
-                    executionQueue.async {
-                        block(error)
-                    }
-                } else {
-                    block(error)
-                }
-            }
-        }
-        return self
-    }
-    
-    public func resolve(value: V) -> Self {
-        assert(0 == once, "This promise has already been resolved")
-        dispatch_once(&once) {
-            self.value = value
-            self.queue.resume()
-        }
-        return self
-    }
-    
-    public func resolve(promise: Promise<V>) -> Self {
-        assert(0 == once, "This promise has already been resolved")
-        dispatch_once(&once) {
-            promise.then { value in
-                self.value = value
-                self.queue.resume()
-            }.`catch` { error in
-                self.error = error
-                self.queue.resume()
-            }
-            return
-        }
-        return self
-    }
-    
-    public func reject(error: NSError) -> Self {
-        assert(0 == once, "This promise has already been resolved")
-        dispatch_once(&once) {
-            self.error = error
-            self.queue.resume()
-        }
-        return self
     }
 }
 
 
-public func promise<V>(onQueue queue: Queue = .Background, executor: ((V)->(), (NSError)->())->()) -> Promise<V> {
-    let p = Promise<V>()
-    queue.async {
-        let resolve = { (value: V) in
-            _ = p.resolve(value)
+public func when<V>(promises: Promise<V>...) -> Promise<[V]> {
+    return when(promises)
+}
+
+
+public func first<V>(promises: [Promise<V>]) -> Promise<V> {
+    let p = Promise<V>(Queue().suspend())
+    for each in promises {
+        each.then { value in
+            p.resolve(.Completed(value: value))
+        }.error { error in
+            p.resolve(.Failed(error: error))
         }
-        let reject = { error in
-            _ = p.reject(error)
-        }
-        executor(resolve, reject)
-        assert(p.resolved, "This promise must be resolved by calling resolve() or reject()")
     }
     return p
 }
 
 
-public func promise<V>(onQueue queue: Queue = .Background, executor: ()->V) -> Promise<V> {
-    let p = Promise<V>()
-    queue.async {
-        _ = p.resolve(executor())
-    }
-    return p
-}
-
-
-public func promise<V>(onQueue queue: Queue = .Background, executor: ()->Promise<V>) -> Promise<V> {
-    let p = Promise<V>()
-    queue.async {
-        _ = p.resolve(executor())
-    }
-    return p
+public func first<V>(promises: Promise<V>...) -> Promise<V> {
+    return first(promises)
 }

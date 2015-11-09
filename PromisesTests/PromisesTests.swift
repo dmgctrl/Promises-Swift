@@ -43,7 +43,7 @@ class PromisesTests: XCTestCase {
     func test2() {
         let expectation = expectationWithDescription("promise completes")
 
-        let x = promise {
+        _ = promise {
             print("23")
         }.then {
             print($0)

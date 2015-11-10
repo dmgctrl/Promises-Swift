@@ -290,7 +290,7 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: ((V)->(
         }
         executor(resolve, reject)
     }
-    return p;
+    return p
 }
 
 
@@ -303,7 +303,7 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: () thro
             p.resolve(.Failed(error: error))
         }
     }
-    return p;
+    return p
 }
 
 

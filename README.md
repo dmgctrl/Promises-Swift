@@ -7,7 +7,7 @@ github "dmgctrl/Promises-Swift" ~> 1.2.3
 
 # License
 
-Copyright 2015, DmgCtrl, Ltd; <help@tonicdesign.com>
+Copyright 2015, Tonic Design; <help@tonicdesign.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

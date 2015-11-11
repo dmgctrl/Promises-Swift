@@ -16,6 +16,9 @@
 		F99C3D3A1AD2D95A000C0273 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		F99C3D411AD2D95A000C0273 /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D4A1AD2D96B000C0273 /* Promise.swift */; };
+		F9FF91701BF3E386005232B9 /* when.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FF916F1BF3E386005232B9 /* when.swift */; };
+		F9FF91721BF3E3B2005232B9 /* first.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FF91711BF3E3B2005232B9 /* first.swift */; };
+		F9FF91741BF3E3DB005232B9 /* zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FF91731BF3E3DB005232B9 /* zip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		F99C3D3F1AD2D95A000C0273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99C3D401AD2D95A000C0273 /* PromisesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesTests.swift; sourceTree = "<group>"; };
 		F99C3D4A1AD2D96B000C0273 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		F9FF916F1BF3E386005232B9 /* when.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = when.swift; sourceTree = "<group>"; };
+		F9FF91711BF3E3B2005232B9 /* first.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = first.swift; sourceTree = "<group>"; };
+		F9FF91731BF3E3DB005232B9 /* zip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,9 @@
 			isa = PBXGroup;
 			children = (
 				F99C3D4A1AD2D96B000C0273 /* Promise.swift */,
+				F9FF916F1BF3E386005232B9 /* when.swift */,
+				F9FF91711BF3E3B2005232B9 /* first.swift */,
+				F9FF91731BF3E3DB005232B9 /* zip.swift */,
 				F99C3D311AD2D95A000C0273 /* Supporting Files */,
 			);
 			path = Promises;
@@ -376,6 +385,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99C3D4B1AD2D96B000C0273 /* Promise.swift in Sources */,
+				F9FF91701BF3E386005232B9 /* when.swift in Sources */,
+				F9FF91721BF3E3B2005232B9 /* first.swift in Sources */,
+				F9FF91741BF3E3DB005232B9 /* zip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

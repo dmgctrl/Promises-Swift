@@ -149,6 +149,63 @@ public class Promise<V> {
         return pr
     }
 
+    /// schedules a block to be executed on the given execution queue, when
+    /// the promise resolves to a value and uses the return value of that block
+    /// as the resolution to a new promise.  any error thrown will cause the
+    /// returned promise to resolve as failed.
+    ///
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type as the return value of the given
+    ///   block, for chaining calls
+    public func map<R>(block: (V) throws -> (Promise<R>)) -> Promise<R> {
+        let pr = Promise<R>(Queue().suspend())
+        resolved { resolution in
+            switch resolution {
+            case .Completed(let value):
+                do {
+                    try block(value)
+                        .resolved(pr.resolve)
+                } catch (let error) {
+                    pr.resolve(.Failed(error: error))
+                }
+            case .Failed(let error):
+                pr.resolve(.Failed(error: error))
+            }
+        }
+        return pr
+    }
+
+    /// schedules a block to be executed on the given execution queue, when
+    /// the promise resolves to a value and uses the return value of that block
+    /// as the resolution to a new promise.  any error thrown will cause the
+    /// returned promise to resolve as failed.
+    ///
+    /// - parameter on: the queue to dispatch the block to
+    /// - parameter block: the block to execute
+    ///
+    /// - returns: a promise of the same type as the return value of the given
+    ///   block, for chaining calls
+    public func map<R>(on executionQueue: Queue, _ block: (V) throws -> (Promise<R>)) -> Promise<R> {
+        let pr = Promise<R>(Queue().suspend())
+        resolved { resolution in
+            executionQueue.async {
+                switch resolution {
+                case .Completed(let value):
+                    do {
+                        try block(value)
+                            .resolved(pr.resolve)
+                    } catch (let error) {
+                        pr.resolve(.Failed(error: error))
+                    }
+                case .Failed(let error):
+                    pr.resolve(.Failed(error: error))
+                }
+            }
+        }
+        return pr
+    }
+
     /// schedules a block to be executed when the promise resolves to an error
     ///
     /// - parameter block: the block to execute

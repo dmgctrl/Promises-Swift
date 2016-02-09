@@ -316,9 +316,7 @@ public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
             let index = i++
             each.then { value in
                 apr[index] = value
-                print(index)
                 if 0 == OSAtomicDecrement32(&remaining) {
-                    print(apr)
                     var ar = [V]()
                     for pr in apr {
                         ar.append(pr!)

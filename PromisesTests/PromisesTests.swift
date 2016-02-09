@@ -57,4 +57,31 @@ class PromisesTests: XCTestCase {
         waitForExpectationsWithTimeout(3) { error in
         }
     }
+    
+    func test3() {
+        
+        let expectation = expectationWithDescription("promise completes")
+        
+        var promises: [Promise<Int>] = []
+
+        for (var i = 0; i < 3; i++) {
+            let index = i
+            let p = promise { resolve, reject in
+                resolve(index)
+            }
+            promises.append(p)
+        }
+        
+        let resolved: Promise<[Int]> = when(promises)
+        
+        resolved.then { ints in
+            assert(ints[0] == 0)
+            assert(ints[1] == 1)
+            assert(ints[2] == 2)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3) { error in
+        }
+    }
 }

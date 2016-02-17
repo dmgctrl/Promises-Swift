@@ -312,18 +312,20 @@ public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
         var apr = [V?](count: promises.count, repeatedValue: nil)
         var i = 0
         var remaining = Int32(promises.count)
+        var failedWithError: ErrorType? = nil
         for each in promises {
             let index = i++
             each.then { value in
                 apr[index] = value
-                if 0 == OSAtomicDecrement32(&remaining) {
-                    var ar = [V]()
-                    for pr in apr {
-                        ar.append(pr!)
-                    }
-                    resolve(ar)
+                if nil == failedWithError && 0 == OSAtomicDecrement32(&remaining) {
+                    resolve(apr.map({ $0! }))
                 }
-            }.error(reject)
+            }.error { error in
+                if nil == failedWithError {
+                    failedWithError = error
+                    reject(error)
+                }
+            }
         }
     }
 }

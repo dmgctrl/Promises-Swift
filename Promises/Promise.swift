@@ -308,6 +308,7 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: () thro
 
 
 public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
+    let syncQueue: Queue = Queue()
     return promise { resolve, reject in
         var apr = [V?](count: promises.count, repeatedValue: nil)
         var i = 0
@@ -316,7 +317,9 @@ public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
         for each in promises {
             let index = i++
             each.then { value in
-                apr[index] = value
+                syncQueue.sync {
+                    apr[index] = value
+                }
                 if nil == failedWithError && 0 == OSAtomicDecrement32(&remaining) {
                     resolve(apr.map({ $0! }))
                 }

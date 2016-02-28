@@ -8,7 +8,7 @@ They also offer a convenient way to deal with internal async methods like animat
 ## Installation
 ### Carthage
 ```
-github "dmgctrl/Promises-Swift" ~> 1.2.3
+github "dmgctrl/Promises-Swift" ~> 1.2.7
 ```
 
 ## Use Cases

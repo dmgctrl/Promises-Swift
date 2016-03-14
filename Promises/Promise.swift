@@ -290,7 +290,7 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: ((V)->(
         }
         executor(resolve, reject)
     }
-    return p;
+    return p
 }
 
 
@@ -303,26 +303,32 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: () thro
             p.resolve(.Failed(error: error))
         }
     }
-    return p;
+    return p
 }
 
 
 public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
+    let syncQueue: Queue = Queue()
     return promise { resolve, reject in
         var apr = [V?](count: promises.count, repeatedValue: nil)
-        let i = 0
+        var i = 0
         var remaining = Int32(promises.count)
+        var failedWithError: ErrorType? = nil
         for each in promises {
+            let index = i++
             each.then { value in
-                apr[i] = value
-                if 0 == OSAtomicDecrement32(&remaining) {
-                    var ar = [V]()
-                    for pr in apr {
-                        ar.append(pr!)
-                    }
-                    resolve(ar)
+                syncQueue.sync {
+                    apr[index] = value
                 }
-            }.error(reject)
+                if nil == failedWithError && 0 == OSAtomicDecrement32(&remaining) {
+                    resolve(apr.map({ $0! }))
+                }
+            }.error { error in
+                if nil == failedWithError {
+                    failedWithError = error
+                    reject(error)
+                }
+            }
         }
     }
 }

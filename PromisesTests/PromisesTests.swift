@@ -1,6 +1,10 @@
 import XCTest
 import Promises
 
+enum PromisesTestsError: ErrorType {
+    case TestError
+}
+
 class PromisesTests: XCTestCase {
     
     func test() {
@@ -43,7 +47,7 @@ class PromisesTests: XCTestCase {
     func test2() {
         let expectation = expectationWithDescription("promise completes")
 
-        let x = promise {
+        _ = promise {
             print("23")
         }.then {
             print($0)
@@ -51,6 +55,56 @@ class PromisesTests: XCTestCase {
             return 23
         }.then { i in
             print(i)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3) { error in
+        }
+    }
+    
+    func test3() {
+        
+        let expectation = expectationWithDescription("promise completes")
+        
+        var promises: [Promise<Int>] = []
+
+        for (var i = 0; i < 3; i++) {
+            let index = i
+            let p = promise { resolve, reject in
+                resolve(index)
+            }
+            promises.append(p)
+        }
+        
+        let resolved: Promise<[Int]> = when(promises)
+        
+        resolved.then { ints in
+            assert(ints[0] == 0)
+            assert(ints[1] == 1)
+            assert(ints[2] == 2)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3) { error in
+        }
+    }
+    
+    func test4() {
+        
+        let expectation = expectationWithDescription("promise fails")
+        
+        var promises: [Promise<Int>] = []
+        
+        for (var i = 0; i < 3; i++) {
+            let p = promise() { () -> Int in
+                throw PromisesTestsError.TestError
+            }
+            promises.append(p)
+        }
+        
+        let resolved: Promise<[Int]> = when(promises)
+        
+        resolved.error { error in
             expectation.fulfill()
         }
         

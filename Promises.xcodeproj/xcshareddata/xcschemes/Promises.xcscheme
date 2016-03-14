@@ -52,6 +52,16 @@
                ReferencedContainer = "container:Promises.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "46C678A41C973268003126D0"
+               BuildableName = "PromisesiOSTests.xctest"
+               BlueprintName = "PromisesiOSTests"
+               ReferencedContainer = "container:Promises.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

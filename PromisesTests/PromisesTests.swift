@@ -141,9 +141,9 @@ class PromisesTests: XCTestCase {
         }
     }
     
-    func testResolving() {
+    func testFulfill() {
         
-        let p = promise(resolution: .Completed(value: 5))
+        let p = fulfill(5)
         
         XCTAssert(p.isFulfilled == true)
     }

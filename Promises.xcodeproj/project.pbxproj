@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		29A3E0631BB1E7C5003E881D /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
+		46C678A81C973268003126D0 /* PromisesiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C678A71C973268003126D0 /* PromisesiOSTests.swift */; };
+		46C678AA1C973268003126D0 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
 		BC8772E71AE04EDC00DFD1BC /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		BC9D5F711AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
 		BC9D5F721AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
@@ -19,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		46C678AB1C973268003126D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F99C3D251AD2D95A000C0273 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F99C3D2D1AD2D95A000C0273;
+			remoteInfo = Promises;
+		};
 		BCFA430D1AE03A60007F78F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F99C3D251AD2D95A000C0273 /* Project object */;
@@ -37,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		22954F5C1ADD9166005F38B6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		46C678A51C973268003126D0 /* PromisesiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromisesiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		46C678A71C973268003126D0 /* PromisesiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromisesiOSTests.swift; sourceTree = "<group>"; };
+		46C678A91C973268003126D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC9D5F6E1AE052C1009E3805 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/iOS/Queue.framework; sourceTree = "<group>"; };
 		BC9D5F701AE052D8009E3805 /* Queue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Queue.framework; path = Carthage/Build/Mac/Queue.framework; sourceTree = "<group>"; };
 		BCFA43011AE03A5F007F78F7 /* Promises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +62,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		46C678A21C973268003126D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46C678AA1C973268003126D0 /* Promises.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCFA42FD1AE03A5F007F78F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -86,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46C678A61C973268003126D0 /* PromisesiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				46C678A71C973268003126D0 /* PromisesiOSTests.swift */,
+				46C678A91C973268003126D0 /* Info.plist */,
+			);
+			path = PromisesiOSTests;
+			sourceTree = "<group>";
+		};
 		BCFA431E1AE03D04007F78F7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +137,7 @@
 			children = (
 				F99C3D301AD2D95A000C0273 /* Promises */,
 				F99C3D3D1AD2D95A000C0273 /* PromisesTests */,
+				46C678A61C973268003126D0 /* PromisesiOSTests */,
 				F99C3D2F1AD2D95A000C0273 /* Products */,
 				F99C3D4E1AD2D9C1000C0273 /* Frameworks */,
 			);
@@ -120,6 +150,7 @@
 				F99C3D391AD2D95A000C0273 /* PromisesTests.xctest */,
 				BCFA43011AE03A5F007F78F7 /* Promises.framework */,
 				BCFA430B1AE03A60007F78F7 /* PromisesTests.xctest */,
+				46C678A51C973268003126D0 /* PromisesiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,6 +218,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		46C678A41C973268003126D0 /* PromisesiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46C678AF1C973268003126D0 /* Build configuration list for PBXNativeTarget "PromisesiOSTests" */;
+			buildPhases = (
+				46C678A11C973268003126D0 /* Sources */,
+				46C678A21C973268003126D0 /* Frameworks */,
+				46C678A31C973268003126D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				46C678AC1C973268003126D0 /* PBXTargetDependency */,
+			);
+			name = PromisesiOSTests;
+			productName = PromisesiOSTests;
+			productReference = 46C678A51C973268003126D0 /* PromisesiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BCFA43001AE03A5F007F78F7 /* Promises(OSX) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCFA43181AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)" */;
@@ -267,10 +316,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Tonic Design";
 				TargetAttributes = {
+					46C678A41C973268003126D0 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = K48344U44J;
+					};
 					BCFA43001AE03A5F007F78F7 = {
 						CreatedOnToolsVersion = 6.2;
 					};
@@ -299,6 +352,7 @@
 			targets = (
 				F99C3D2D1AD2D95A000C0273 /* Promises */,
 				F99C3D381AD2D95A000C0273 /* PromisesTests */,
+				46C678A41C973268003126D0 /* PromisesiOSTests */,
 				BCFA43001AE03A5F007F78F7 /* Promises(OSX) */,
 				BCFA430A1AE03A60007F78F7 /* Promises(OSX)Tests */,
 			);
@@ -306,6 +360,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		46C678A31C973268003126D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCFA42FF1AE03A5F007F78F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +416,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		46C678A11C973268003126D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46C678A81C973268003126D0 /* PromisesiOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCFA42FC1AE03A5F007F78F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,6 +459,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		46C678AC1C973268003126D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F99C3D2D1AD2D95A000C0273 /* Promises */;
+			targetProxy = 46C678AB1C973268003126D0 /* PBXContainerItemProxy */;
+		};
 		BCFA430E1AE03A60007F78F7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BCFA43001AE03A5F007F78F7 /* Promises(OSX) */;
@@ -403,6 +477,32 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		46C678AD1C973268003126D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = PromisesiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises.PromisesiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		46C678AE1C973268003126D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = PromisesiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises.PromisesiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		BCFA43141AE03A60007F78F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -655,6 +755,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		46C678AF1C973268003126D0 /* Build configuration list for PBXNativeTarget "PromisesiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46C678AD1C973268003126D0 /* Debug */,
+				46C678AE1C973268003126D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BCFA43181AE03A60007F78F7 /* Build configuration list for PBXNativeTarget "Promises(OSX)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -10,6 +10,7 @@
 		29A3E0631BB1E7C5003E881D /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
 		46C678A81C973268003126D0 /* PromisesiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C678A71C973268003126D0 /* PromisesiOSTests.swift */; };
 		46C678AA1C973268003126D0 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99C3D2E1AD2D95A000C0273 /* Promises.framework */; };
+		46C678B01C973499003126D0 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F6E1AE052C1009E3805 /* Queue.framework */; };
 		BC8772E71AE04EDC00DFD1BC /* PromisesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C3D401AD2D95A000C0273 /* PromisesTests.swift */; };
 		BC9D5F711AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
 		BC9D5F721AE052D8009E3805 /* Queue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9D5F701AE052D8009E3805 /* Queue.framework */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46C678B01C973499003126D0 /* Queue.framework in Frameworks */,
 				46C678AA1C973268003126D0 /* Promises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,11 +482,15 @@
 		46C678AD1C973268003126D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = PromisesiOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises.PromisesiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -494,10 +500,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = PromisesiOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tonicdesign.Promises.PromisesiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

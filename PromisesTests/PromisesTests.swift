@@ -140,4 +140,11 @@ class PromisesTests: XCTestCase {
         waitForExpectationsWithTimeout(3) { error in
         }
     }
+    
+    func testResolving() {
+        
+        let p = promise(resolution: .Completed(value: 5))
+        
+        XCTAssert(p.isFulfilled == true)
+    }
 }

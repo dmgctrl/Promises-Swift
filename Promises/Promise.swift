@@ -306,6 +306,15 @@ public func promise<V>(on executionQueue: Queue = .Background, executor: () thro
     return p
 }
 
+public func promise<V>(on executionQueue: Queue = .Background, resolution: Resolution<V>) -> Promise<V> {
+    let p = Promise<V>(Queue().suspend())
+    
+    executionQueue.sync {
+        p.resolve(resolution)
+    }
+    
+    return p
+}
 
 public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
     let syncQueue: Queue = Queue()

@@ -67,9 +67,8 @@ class PromisesTests: XCTestCase {
         let expectation = expectationWithDescription("promise completes")
         
         var promises: [Promise<Int>] = []
-
-        for (var i = 0; i < 3; i++) {
-            let index = i
+        
+        for index in 0..<3 {
             let p = promise { resolve, reject in
                 resolve(index)
             }
@@ -95,7 +94,7 @@ class PromisesTests: XCTestCase {
         
         var promises: [Promise<Int>] = []
         
-        for (var i = 0; i < 3; i++) {
+        for _ in 0..<3 {
             let p = promise() { () -> Int in
                 throw PromisesTestsError.TestError
             }
@@ -118,7 +117,7 @@ class PromisesTests: XCTestCase {
         
         var promises: [Promise<UIView>] = []
         
-        for (var i = 0; i < 3; i++) {
+        for _ in 0..<3 {
             let p = promise() { () -> UIView in
                 let rect = CGRect(
                     origin: CGPoint(x: 0, y: 0),

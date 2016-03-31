@@ -10,7 +10,7 @@ class PromisesiOSTests: XCTestCase {
         
         var promises: [Promise<UIView>] = []
         
-        for (var i = 0; i < 3; i++) {
+        for _ in 0..<3 {
             let p = promise() { () -> UIView in
                 let rect = CGRect(
                     origin: CGPoint(x: 0, y: 0),

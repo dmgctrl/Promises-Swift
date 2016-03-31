@@ -320,7 +320,8 @@ public func when<V>(promises: [Promise<V>]) -> Promise<[V]> {
         var remaining = Int32(promises.count)
         var failedWithError: ErrorType? = nil
         for each in promises {
-            let index = i++
+            let index = i
+            i += 1
             each.then { value in
                 syncQueue.sync {
                     apr[index] = value

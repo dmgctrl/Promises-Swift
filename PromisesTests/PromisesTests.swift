@@ -50,7 +50,7 @@ class PromisesTests: XCTestCase {
         _ = promise {
             print("23")
         }.then {
-            print($0)
+            print("\($0)")
         }.then {
             return 23
         }.then { i in

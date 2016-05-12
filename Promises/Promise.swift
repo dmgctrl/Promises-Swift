@@ -361,3 +361,13 @@ public func first<V>(promises: [Promise<V>]) -> Promise<V> {
 public func first<V>(promises: Promise<V>...) -> Promise<V> {
     return first(promises)
 }
+
+public func completed<V>(promises: [Promise<V>]) -> Promise<Void> {
+    return promise { resolve, reject in
+        when(promises).then { _ in
+            resolve()
+        }.error { _ in
+            resolve()
+        }
+    }
+}

@@ -145,4 +145,25 @@ class PromisesTests: XCTestCase {
         
         XCTAssert(p.isFulfilled == true)
     }
+    
+    func testCompleted() {
+        let expectation = expectationWithDescription("promise completes")
+        
+        var promises: [Promise<Int>] = []
+        
+        let p = promise() { () -> Int in
+            throw PromisesTestsError.TestError
+        }
+        promises.append(p)
+        
+        let p2 = fulfill(1)
+        promises.append(p2)
+        
+        completed(promises).then { _ in
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3) { error in
+        }
+    }
 }

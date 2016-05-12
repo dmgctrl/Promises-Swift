@@ -344,6 +344,54 @@ public func when<V>(promises: Promise<V>...) -> Promise<[V]> {
     return when(promises)
 }
 
+public func when<T, U>(t: Promise<T>, _ u: Promise<U>) -> Promise<(T, U)> {
+    var tValue: T?
+    var uValue: U?
+    
+    return promise { resolve, reject in
+        var counter: Int32 = 2
+        t.error(reject).then {
+            tValue = $0
+            if 0 == OSAtomicDecrement32(&counter) {
+                resolve((tValue!, uValue!))
+            }
+        }
+        u.error(reject).then {
+            uValue = $0
+            if 0 == OSAtomicDecrement32(&counter) {
+                resolve((tValue!, uValue!))
+            }
+        }
+    }
+}
+
+public func when<T, U, V>(t: Promise<T>, _ u: Promise<U>, _ v: Promise<V>) -> Promise<(T, U, V)> {
+    var tValue: T?
+    var uValue: U?
+    var vValue: V?
+    let promiseCount: Int32 = 3
+    return promise { resolve, reject in
+        var counter: Int32 = promiseCount
+        t.error(reject).then {
+            tValue = $0
+            if 0 == OSAtomicDecrement32(&counter) {
+                resolve((tValue!, uValue!, vValue!))
+            }
+        }
+        u.error(reject).then {
+            uValue = $0
+            if 0 == OSAtomicDecrement32(&counter) {
+                resolve((tValue!, uValue!, vValue!))
+            }
+        }
+        v.error(reject).then {
+            vValue = $0
+            if 0 == OSAtomicDecrement32(&counter) {
+                resolve((tValue!, uValue!, vValue!))
+            }
+        }
+    }
+}
 
 public func first<V>(promises: [Promise<V>]) -> Promise<V> {
     let p = Promise<V>(Queue().suspend())

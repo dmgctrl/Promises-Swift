@@ -312,8 +312,6 @@ public func fulfill<V>(_ value: V) -> Promise<V> {
 public func when<V>(_ promises: [Promise<V>]) -> Promise<[V]> {
     let syncQueue: Queue = Queue()
     
-    //@escaping ((V)->(), (Error)->())->()) -> Promise<V>
-    
     return promise { resolve, reject in
         var apr = [V?](repeating: nil, count: promises.count)
         var i = 0

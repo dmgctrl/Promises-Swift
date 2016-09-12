@@ -6,7 +6,7 @@ class PromisesiOSTests: XCTestCase {
     
     func test1() {
         
-        let expectation = expectationWithDescription("promise completes")
+        let expectation = self.expectation(description: "promise completes")
         
         var promises: [Promise<UIView>] = []
         
@@ -28,7 +28,7 @@ class PromisesiOSTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
     }
     

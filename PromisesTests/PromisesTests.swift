@@ -1,16 +1,16 @@
 import XCTest
 import Promises
 
-enum PromisesTestsError: ErrorType {
-    case TestError
+enum PromisesTestsError: Error {
+    case testError
 }
 
 class PromisesTests: XCTestCase {
     
     func test() {
-        let expectation = expectationWithDescription("promise completes")
+        let expectation = self.expectation(description: "promise completes")
         var v = ""
-        var e: ErrorType?
+        var e: Error?
         
         promise { () -> Int in
                 23
@@ -37,7 +37,7 @@ class PromisesTests: XCTestCase {
                 expectation.fulfill()
             }
 
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
         
         XCTAssert("46" == v)
@@ -45,7 +45,7 @@ class PromisesTests: XCTestCase {
     }
  
     func test2() {
-        let expectation = expectationWithDescription("promise completes")
+        let expectation = self.expectation(description: "promise completes")
 
         _ = promise {
             print("23")
@@ -58,13 +58,13 @@ class PromisesTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
     }
     
     func test3() {
         
-        let expectation = expectationWithDescription("promise completes")
+        let expectation = self.expectation(description: "promise completes")
         
         var promises: [Promise<Int>] = []
         
@@ -84,19 +84,19 @@ class PromisesTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
     }
     
     func test4() {
         
-        let expectation = expectationWithDescription("promise fails")
+        let expectation = self.expectation(description: "promise fails")
         
         var promises: [Promise<Int>] = []
         
         for _ in 0..<3 {
             let p = promise() { () -> Int in
-                throw PromisesTestsError.TestError
+                throw PromisesTestsError.testError
             }
             promises.append(p)
         }
@@ -107,13 +107,13 @@ class PromisesTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
     }
     
     func test5() {
         
-        let expectation = expectationWithDescription("promise completes")
+        let expectation = self.expectation(description: "promise completes")
         
         var promises: [Promise<UIView>] = []
         
@@ -135,7 +135,7 @@ class PromisesTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(3) { error in
+        waitForExpectations(timeout: 3) { error in
         }
     }
     
